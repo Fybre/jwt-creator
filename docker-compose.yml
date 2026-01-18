@@ -3,5 +3,5 @@ services:
     container_name: jwt-creator
     build: .
     ports:
-      - "8080:80"
+      - "8084:80"
     restart: unless-stopped
