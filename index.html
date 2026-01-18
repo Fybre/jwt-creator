@@ -25,519 +25,528 @@
 
             <!-- Encoder Tab -->
             <div id="encoder-tab" class="tab-content active">
-            <form id="jwt-form">
-                <!-- Basic JWT Settings -->
-                <section class="form-section">
-                    <h2>JWT Settings</h2>
+                <form id="jwt-form">
+                    <!-- Basic JWT Settings -->
+                    <section class="form-section">
+                        <h2>JWT Settings</h2>
 
-                    <div class="form-group">
-                        <label for="issuer">Issuer (iss) <span class="required">*</span></label>
-                        <input type="text" id="issuer" name="issuer" placeholder="https://tenantname.au" required>
-                        <small>Must match the issuer value configured in Therefore</small>
-                    </div>
+                        <div class="form-group">
+                            <label for="issuer">Issuer (iss) <span class="required">*</span></label>
+                            <input type="text" id="issuer" name="issuer" placeholder="https://tenantname.au" required>
+                            <small>Must match the issuer value configured in Therefore</small>
+                        </div>
 
-                    <div class="form-group">
-                        <label for="audience">Audience / Customer ID (aud) <span class="required">*</span></label>
-                        <input type="text" id="audience" name="audience" placeholder="5JML5D71XX" required>
-                        <small>Your Therefore tenant Customer ID</small>
-                    </div>
+                        <div class="form-group">
+                            <label for="audience">Audience / Customer ID (aud) <span class="required">*</span></label>
+                            <input type="text" id="audience" name="audience" placeholder="5JML5D71XX" required>
+                            <small>Your Therefore tenant Customer ID</small>
+                        </div>
 
-                    <div class="form-group">
-                        <label for="secret">Secret <span class="required">*</span></label>
-                        <div class="input-with-toggle">
-                            <div class="input-with-copy">
-                                <input type="password" id="secret" name="secret" minlength="32" required>
-                                <button type="button" id="copy-secret" class="btn-copy-inline"
-                                    title="Copy to clipboard">
-                                    <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
-                                        <path
-                                            d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 0 1 0 1.5h-1.5a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-1.5a.75.75 0 0 1 1.5 0v1.5A1.75 1.75 0 0 1 9.25 16h-7.5A1.75 1.75 0 0 1 0 14.25Z">
-                                        </path>
-                                        <path
-                                            d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0 1 14.25 11h-7.5A1.75 1.75 0 0 1 5 9.25Zm1.75-.25a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25Z">
-                                        </path>
-                                    </svg>
+                        <div class="form-group">
+                            <label for="secret">Secret <span class="required">*</span></label>
+                            <div class="input-with-toggle">
+                                <div class="input-with-copy">
+                                    <input type="password" id="secret" name="secret" minlength="32" required>
+                                    <button type="button" id="copy-secret" class="btn-copy-inline"
+                                        title="Copy to clipboard">
+                                        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                                            <path
+                                                d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 0 1 0 1.5h-1.5a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-1.5a.75.75 0 0 1 1.5 0v1.5A1.75 1.75 0 0 1 9.25 16h-7.5A1.75 1.75 0 0 1 0 14.25Z">
+                                            </path>
+                                            <path
+                                                d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0 1 14.25 11h-7.5A1.75 1.75 0 0 1 5 9.25Zm1.75-.25a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25Z">
+                                            </path>
+                                        </svg>
+                                    </button>
+                                </div>
+                                <button type="button" id="generate-secret" class="btn-icon"
+                                    title="Generate random secret">
+                                    Generate
+                                </button>
+                                <button type="button" id="toggle-secret" class="btn-icon" title="Show/Hide">
+                                    <span class="eye-icon">Show</span>
                                 </button>
                             </div>
-                            <button type="button" id="generate-secret" class="btn-icon" title="Generate random secret">
-                                Generate
-                            </button>
-                            <button type="button" id="toggle-secret" class="btn-icon" title="Show/Hide">
-                                <span class="eye-icon">Show</span>
-                            </button>
+                            <small>Minimum 32 characters - must match Therefore configuration</small>
                         </div>
-                        <small>Minimum 32 characters - must match Therefore configuration</small>
+                    </section>
+
+                    <!-- User Settings -->
+                    <section class="form-section">
+                        <h2>User Settings</h2>
+
+                        <div class="form-group">
+                            <label for="identity-claim-type">Identity Claim Type</label>
+                            <select id="identity-claim-type" name="identity-claim-type">
+                                <option value="windowsaccountname" selected>Windows Account Name</option>
+                                <option value="name">Name</option>
+                                <option value="emailaddress">Email Address</option>
+                            </select>
+                            <small>Windows Account Name is the recommended identity claim for Therefore</small>
+                        </div>
+
+                        <div id="windows-account-fields">
+                            <div class="form-group">
+                                <label for="username">Username <span class="required">*</span></label>
+                                <input type="text" id="username" name="username" placeholder="username" required>
+                                <small>User account with rights to the category/case</small>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="domain">Domain (optional)</label>
+                                <input type="text" id="domain" name="domain" placeholder="DOMAIN">
+                                <small>Leave empty for local accounts</small>
+                            </div>
+                        </div>
+
+                        <div id="name-field" style="display: none;">
+                            <div class="form-group">
+                                <label for="user-name">Name <span class="required">*</span></label>
+                                <input type="text" id="user-name" name="user-name" placeholder="John Doe">
+                                <small>User's display name</small>
+                            </div>
+                        </div>
+
+                        <div id="email-field" style="display: none;">
+                            <div class="form-group">
+                                <label for="user-email">Email Address <span class="required">*</span></label>
+                                <input type="email" id="user-email" name="user-email" placeholder="user@example.com">
+                                <small>User's email address</small>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="scope">Scope</label>
+                            <select id="scope" name="scope">
+                                <option value="therefore_user" selected>therefore_user</option>
+                                <option value="therefore_read">therefore_read</option>
+                                <option value="therefore_specific">therefore_specific</option>
+                            </select>
+                            <div class="scope-info">
+                                <div class="scope-info-item"><strong>therefore_user</strong> — Full access using the
+                                    user's
+                                    existing Therefore permissions</div>
+                                <div class="scope-info-item"><strong>therefore_read</strong> — Read-only access using
+                                    the
+                                    user's existing permissions</div>
+                                <div class="scope-info-item"><strong>therefore_specific</strong> — Uses granular
+                                    permissions
+                                    defined in JWT claims (the:ctgry, the:casedef, etc.)</div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Date/Time Settings -->
+                    <section class="form-section">
+                        <h2>Token Validity</h2>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="nbf-date">Not Before (nbf) <span class="required">*</span></label>
+                                <input type="datetime-local" id="nbf-date" name="nbf-date" required>
+                                <div class="timestamp-preview">Unix: <span id="nbf-timestamp">-</span></div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="exp-date">Expiry (exp) <span class="required">*</span></label>
+                                <input type="datetime-local" id="exp-date" name="exp-date" required>
+                                <div class="timestamp-preview">Unix: <span id="exp-timestamp">-</span></div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>
+                                <input type="checkbox" id="include-iat" name="include-iat">
+                                Include Issued At (iat) - uses current time
+                            </label>
+                        </div>
+
+                        <div class="quick-dates">
+                            <span>Quick expiry:</span>
+                            <button type="button" class="btn-small" data-days="7">7 days</button>
+                            <button type="button" class="btn-small" data-days="30">30 days</button>
+                            <button type="button" class="btn-small" data-days="90">90 days</button>
+                            <button type="button" class="btn-small" data-days="365">1 year</button>
+                            <button type="button" class="btn-small" data-days="730">2 years</button>
+                        </div>
+                    </section>
+
+                    <!-- Permission Helper -->
+                    <section class="form-section" id="permission-calculator-section">
+                        <h2>Permission Calculator</h2>
+                        <p class="section-desc">Select permissions to calculate the combined value. Permissions are
+                            grouped
+                            by type.</p>
+
+                        <div class="permission-calculator">
+                            <h3>General / Admin Permissions</h3>
+                            <div class="permission-checkboxes">
+                                <label class="permission-item">
+                                    <input type="checkbox" name="perm" value="8" checked>
+                                    <span class="perm-value">8</span> - AccessPermission
+                                </label>
+                                <label class="permission-item">
+                                    <input type="checkbox" name="perm" value="1">
+                                    <span class="perm-value">1</span> - OperatorPermission
+                                </label>
+                                <label class="permission-item">
+                                    <input type="checkbox" name="perm" value="2">
+                                    <span class="perm-value">2</span> - AdminPermission
+                                </label>
+                                <label class="permission-item">
+                                    <input type="checkbox" name="perm" value="4">
+                                    <span class="perm-value">4</span> - SetPermPermission
+                                </label>
+                                <label class="permission-item">
+                                    <input type="checkbox" name="perm" value="32">
+                                    <span class="perm-value">32</span> - TheSystemWritePermission
+                                </label>
+                                <label class="permission-item">
+                                    <input type="checkbox" name="perm" value="64">
+                                    <span class="perm-value">64</span> - CategoryArchivePermission
+                                </label>
+                                <label class="permission-item">
+                                    <input type="checkbox" name="perm" value="128">
+                                    <span class="perm-value">128</span> - QueryAdminPermission
+                                </label>
+                                <label class="permission-item">
+                                    <input type="checkbox" name="perm" value="256" checked>
+                                    <span class="perm-value">256</span> - QueryExecutePermission
+                                </label>
+                                <label class="permission-item">
+                                    <input type="checkbox" name="perm" value="512">
+                                    <span class="perm-value">512</span> - KeywordDictionaryChangePermission
+                                </label>
+                            </div>
+
+                            <h3>Document Permissions</h3>
+                            <div class="permission-checkboxes">
+                                <label class="permission-item">
+                                    <input type="checkbox" name="perm" value="4096">
+                                    <span class="perm-value">4096</span> - DocViewInHitListPermission
+                                </label>
+                                <label class="permission-item">
+                                    <input type="checkbox" name="perm" value="8192">
+                                    <span class="perm-value">8192</span> - DocViewDocPermission
+                                </label>
+                                <label class="permission-item">
+                                    <input type="checkbox" name="perm" value="16384">
+                                    <span class="perm-value">16384</span> - DocPrintPermission
+                                </label>
+                                <label class="permission-item">
+                                    <input type="checkbox" name="perm" value="32768">
+                                    <span class="perm-value">32768</span> - DocExportSendPermission
+                                </label>
+                                <label class="permission-item">
+                                    <input type="checkbox" name="perm" value="262144">
+                                    <span class="perm-value">262144</span> - DocViewHistoryPermission
+                                </label>
+                                <label class="permission-item">
+                                    <input type="checkbox" name="perm" value="524288">
+                                    <span class="perm-value">524288</span> - DocAddAnnotationsPermission
+                                </label>
+                                <label class="permission-item">
+                                    <input type="checkbox" name="perm" value="1048576">
+                                    <span class="perm-value">1048576</span> - DocDeleteAnnotationsPermission
+                                </label>
+                                <label class="permission-item">
+                                    <input type="checkbox" name="perm" value="2097152">
+                                    <span class="perm-value">2097152</span> - DocEditPermission
+                                </label>
+                                <label class="permission-item">
+                                    <input type="checkbox" name="perm" value="4194304">
+                                    <span class="perm-value">4194304</span> - DocUpdateIndexDataPermission
+                                </label>
+                                <label class="permission-item">
+                                    <input type="checkbox" name="perm" value="8388608">
+                                    <span class="perm-value">8388608</span> - DocAddPagePermission
+                                </label>
+                                <label class="permission-item">
+                                    <input type="checkbox" name="perm" value="16777216">
+                                    <span class="perm-value">16777216</span> - DocDeletePagePermission
+                                </label>
+                                <label class="permission-item">
+                                    <input type="checkbox" name="perm" value="33554432">
+                                    <span class="perm-value">33554432</span> - DocDeleteDocPermission
+                                </label>
+                            </div>
+
+                            <h3>Workflow Permissions</h3>
+                            <div class="permission-checkboxes">
+                                <label class="permission-item">
+                                    <input type="checkbox" name="perm" value="8589934592">
+                                    <span class="perm-value">8589934592</span> - WfParticipatePermission
+                                </label>
+                                <label class="permission-item">
+                                    <input type="checkbox" name="perm" value="17179869184">
+                                    <span class="perm-value">17179869184</span> - WfAddDocPermission
+                                </label>
+                                <label class="permission-item">
+                                    <input type="checkbox" name="perm" value="34359738368">
+                                    <span class="perm-value">34359738368</span> - WfViewHistoryPermission
+                                </label>
+                                <label class="permission-item">
+                                    <input type="checkbox" name="perm" value="68719476736">
+                                    <span class="perm-value">68719476736</span> - WfDelegatePermission
+                                </label>
+                                <label class="permission-item">
+                                    <input type="checkbox" name="perm" value="137438953472">
+                                    <span class="perm-value">137438953472</span> - WfViewAllPermission
+                                </label>
+                                <label class="permission-item">
+                                    <input type="checkbox" name="perm" value="274877906944">
+                                    <span class="perm-value">274877906944</span> - WfDeletePermission
+                                </label>
+                            </div>
+
+                            <h3>Category Field Permissions</h3>
+                            <div class="permission-checkboxes">
+                                <label class="permission-item">
+                                    <input type="checkbox" name="perm" value="4096">
+                                    <span class="perm-value">4096</span> - CategoryFieldReadPermission
+                                </label>
+                                <label class="permission-item">
+                                    <input type="checkbox" name="perm" value="64">
+                                    <span class="perm-value">64</span> - CategoryFieldSetPermission
+                                </label>
+                                <label class="permission-item">
+                                    <input type="checkbox" name="perm" value="4194304">
+                                    <span class="perm-value">4194304</span> - CategoryFieldChangePermission
+                                </label>
+                            </div>
+
+                            <div class="permission-result">
+                                Calculated Permission Value: <strong id="calculated-permission">256</strong>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Object Permissions -->
+                    <section class="form-section" id="object-permissions-section">
+                        <h2>Object Permissions</h2>
+                        <p class="section-desc">Configure permissions for specific Therefore objects. Leave ID empty to
+                            exclude from token.</p>
+
+                        <!-- Category -->
+                        <div class="object-permission">
+                            <h3>Category (the:ctgry)</h3>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="category-id">Category ID</label>
+                                    <input type="number" id="category-id" name="category-id" placeholder="305">
+                                </div>
+                                <div class="form-group">
+                                    <label for="category-perm">Permission Value</label>
+                                    <input type="text" id="category-perm" name="category-perm" placeholder="256">
+                                </div>
+                                <div class="form-group">
+                                    <button type="button" class="btn-small btn-apply" data-target="category-perm">Apply
+                                        Calculated</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Case Definition -->
+                        <div class="object-permission">
+                            <h3>Case Definition (the:casedef)</h3>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="casedef-id">Case Definition ID</label>
+                                    <input type="number" id="casedef-id" name="casedef-id" placeholder="9">
+                                </div>
+                                <div class="form-group">
+                                    <label for="casedef-perm">Permission Value</label>
+                                    <input type="text" id="casedef-perm" name="casedef-perm" placeholder="256">
+                                </div>
+                                <div class="form-group">
+                                    <button type="button" class="btn-small btn-apply" data-target="casedef-perm">Apply
+                                        Calculated</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Case -->
+                        <div class="object-permission">
+                            <h3>Case (the:case)</h3>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="case-id">Case ID</label>
+                                    <input type="number" id="case-id" name="case-id" placeholder="123">
+                                </div>
+                                <div class="form-group">
+                                    <label for="case-perm">Permission Value</label>
+                                    <input type="text" id="case-perm" name="case-perm" placeholder="256">
+                                </div>
+                                <div class="form-group">
+                                    <button type="button" class="btn-small btn-apply" data-target="case-perm">Apply
+                                        Calculated</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Document -->
+                        <div class="object-permission">
+                            <h3>Document (the:doc)</h3>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="doc-id">Document ID</label>
+                                    <input type="number" id="doc-id" name="doc-id" placeholder="456">
+                                </div>
+                                <div class="form-group">
+                                    <label for="doc-perm">Permission Value</label>
+                                    <input type="text" id="doc-perm" name="doc-perm" placeholder="8192">
+                                </div>
+                                <div class="form-group">
+                                    <button type="button" class="btn-small btn-apply" data-target="doc-perm">Apply
+                                        Calculated</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Workflow Instance -->
+                        <div class="object-permission">
+                            <h3>Workflow Instance (the:wfinst)</h3>
+                            <small class="object-note">Format: InstanceNo:TokenNo:Permission</small>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="wfinst-id">Instance ID</label>
+                                    <input type="number" id="wfinst-id" name="wfinst-id" placeholder="789">
+                                </div>
+                                <div class="form-group">
+                                    <label for="wfinst-token">Token No</label>
+                                    <input type="number" id="wfinst-token" name="wfinst-token" placeholder="1">
+                                </div>
+                                <div class="form-group">
+                                    <label for="wfinst-perm">Permission Value</label>
+                                    <input type="text" id="wfinst-perm" name="wfinst-perm" placeholder="8589934592">
+                                </div>
+                                <div class="form-group">
+                                    <button type="button" class="btn-small btn-apply" data-target="wfinst-perm">Apply
+                                        Calculated</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- eForm -->
+                        <div class="object-permission">
+                            <h3>eForm (the:eform)</h3>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="eform-id">eForm ID</label>
+                                    <input type="number" id="eform-id" name="eform-id" placeholder="101">
+                                </div>
+                                <div class="form-group">
+                                    <label for="eform-perm">Permission Value</label>
+                                    <input type="text" id="eform-perm" name="eform-perm" placeholder="256">
+                                </div>
+                                <div class="form-group">
+                                    <button type="button" class="btn-small btn-apply" data-target="eform-perm">Apply
+                                        Calculated</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Indexing Profile -->
+                        <div class="object-permission">
+                            <h3>Indexing Profile (the:ixprof)</h3>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="ixprof-id">Indexing Profile ID</label>
+                                    <input type="number" id="ixprof-id" name="ixprof-id" placeholder="55">
+                                </div>
+                                <div class="form-group">
+                                    <label for="ixprof-perm">Permission Value</label>
+                                    <input type="text" id="ixprof-perm" name="ixprof-perm" placeholder="256">
+                                </div>
+                                <div class="form-group">
+                                    <button type="button" class="btn-small btn-apply" data-target="ixprof-perm">Apply
+                                        Calculated</button>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Generate Button -->
+                    <div class="form-actions">
+                        <button type="submit" class="btn-primary" id="generate-btn">Generate JWT</button>
+                        <button type="reset" class="btn-secondary">Reset Form</button>
+                    </div>
+                </form>
+
+                <!-- Output Section -->
+                <section class="output-section" id="output-section" style="display: none;">
+                    <h2>Generated JWT</h2>
+
+                    <div class="output-box">
+                        <label>JWT Token</label>
+                        <div class="token-container">
+                            <textarea id="jwt-output" readonly rows="4"></textarea>
+                            <button type="button" class="btn-copy" id="copy-jwt" title="Copy to clipboard">Copy</button>
+                        </div>
+                    </div>
+
+                    <div class="output-box">
+                        <label>Decoded Payload</label>
+                        <pre id="payload-preview"></pre>
+                    </div>
+
+                    <div class="output-box">
+                        <label>Authorization Header</label>
+                        <div class="token-container">
+                            <input type="text" id="auth-header" readonly>
+                            <button type="button" class="btn-copy" id="copy-header"
+                                title="Copy to clipboard">Copy</button>
+                        </div>
                     </div>
                 </section>
-
-                <!-- User Settings -->
-                <section class="form-section">
-                    <h2>User Settings</h2>
-
-                    <div class="form-group">
-                        <label for="identity-claim-type">Identity Claim Type</label>
-                        <select id="identity-claim-type" name="identity-claim-type">
-                            <option value="windowsaccountname" selected>Windows Account Name</option>
-                            <option value="name">Name</option>
-                            <option value="emailaddress">Email Address</option>
-                        </select>
-                        <small>Windows Account Name is the recommended identity claim for Therefore</small>
-                    </div>
-
-                    <div id="windows-account-fields">
-                        <div class="form-group">
-                            <label for="username">Username <span class="required">*</span></label>
-                            <input type="text" id="username" name="username" placeholder="username" required>
-                            <small>User account with rights to the category/case</small>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="domain">Domain (optional)</label>
-                            <input type="text" id="domain" name="domain" placeholder="DOMAIN">
-                            <small>Leave empty for local accounts</small>
-                        </div>
-                    </div>
-
-                    <div id="name-field" style="display: none;">
-                        <div class="form-group">
-                            <label for="user-name">Name <span class="required">*</span></label>
-                            <input type="text" id="user-name" name="user-name" placeholder="John Doe">
-                            <small>User's display name</small>
-                        </div>
-                    </div>
-
-                    <div id="email-field" style="display: none;">
-                        <div class="form-group">
-                            <label for="user-email">Email Address <span class="required">*</span></label>
-                            <input type="email" id="user-email" name="user-email" placeholder="user@example.com">
-                            <small>User's email address</small>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="scope">Scope</label>
-                        <select id="scope" name="scope">
-                            <option value="therefore_user" selected>therefore_user</option>
-                            <option value="therefore_read">therefore_read</option>
-                            <option value="therefore_specific">therefore_specific</option>
-                        </select>
-                        <div class="scope-info">
-                            <div class="scope-info-item"><strong>therefore_user</strong> — Full access using the user's
-                                existing Therefore permissions</div>
-                            <div class="scope-info-item"><strong>therefore_read</strong> — Read-only access using the
-                                user's existing permissions</div>
-                            <div class="scope-info-item"><strong>therefore_specific</strong> — Uses granular permissions
-                                defined in JWT claims (the:ctgry, the:casedef, etc.)</div>
-                        </div>
-                    </div>
-                </section>
-
-                <!-- Date/Time Settings -->
-                <section class="form-section">
-                    <h2>Token Validity</h2>
-
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="nbf-date">Not Before (nbf) <span class="required">*</span></label>
-                            <input type="datetime-local" id="nbf-date" name="nbf-date" required>
-                            <div class="timestamp-preview">Unix: <span id="nbf-timestamp">-</span></div>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="exp-date">Expiry (exp) <span class="required">*</span></label>
-                            <input type="datetime-local" id="exp-date" name="exp-date" required>
-                            <div class="timestamp-preview">Unix: <span id="exp-timestamp">-</span></div>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label>
-                            <input type="checkbox" id="include-iat" name="include-iat">
-                            Include Issued At (iat) - uses current time
-                        </label>
-                    </div>
-
-                    <div class="quick-dates">
-                        <span>Quick expiry:</span>
-                        <button type="button" class="btn-small" data-days="7">7 days</button>
-                        <button type="button" class="btn-small" data-days="30">30 days</button>
-                        <button type="button" class="btn-small" data-days="90">90 days</button>
-                        <button type="button" class="btn-small" data-days="365">1 year</button>
-                        <button type="button" class="btn-small" data-days="730">2 years</button>
-                    </div>
-                </section>
-
-                <!-- Permission Helper -->
-                <section class="form-section" id="permission-calculator-section">
-                    <h2>Permission Calculator</h2>
-                    <p class="section-desc">Select permissions to calculate the combined value. Permissions are grouped
-                        by type.</p>
-
-                    <div class="permission-calculator">
-                        <h3>General / Admin Permissions</h3>
-                        <div class="permission-checkboxes">
-                            <label class="permission-item">
-                                <input type="checkbox" name="perm" value="8">
-                                <span class="perm-value">8</span> - AccessPermission
-                            </label>
-                            <label class="permission-item">
-                                <input type="checkbox" name="perm" value="1">
-                                <span class="perm-value">1</span> - OperatorPermission
-                            </label>
-                            <label class="permission-item">
-                                <input type="checkbox" name="perm" value="2">
-                                <span class="perm-value">2</span> - AdminPermission
-                            </label>
-                            <label class="permission-item">
-                                <input type="checkbox" name="perm" value="4">
-                                <span class="perm-value">4</span> - SetPermPermission
-                            </label>
-                            <label class="permission-item">
-                                <input type="checkbox" name="perm" value="32">
-                                <span class="perm-value">32</span> - TheSystemWritePermission
-                            </label>
-                            <label class="permission-item">
-                                <input type="checkbox" name="perm" value="64">
-                                <span class="perm-value">64</span> - CategoryArchivePermission
-                            </label>
-                            <label class="permission-item">
-                                <input type="checkbox" name="perm" value="128">
-                                <span class="perm-value">128</span> - QueryAdminPermission
-                            </label>
-                            <label class="permission-item">
-                                <input type="checkbox" name="perm" value="256" checked>
-                                <span class="perm-value">256</span> - QueryExecutePermission
-                            </label>
-                            <label class="permission-item">
-                                <input type="checkbox" name="perm" value="512">
-                                <span class="perm-value">512</span> - KeywordDictionaryChangePermission
-                            </label>
-                        </div>
-
-                        <h3>Document Permissions</h3>
-                        <div class="permission-checkboxes">
-                            <label class="permission-item">
-                                <input type="checkbox" name="perm" value="4096">
-                                <span class="perm-value">4096</span> - DocViewInHitListPermission
-                            </label>
-                            <label class="permission-item">
-                                <input type="checkbox" name="perm" value="8192">
-                                <span class="perm-value">8192</span> - DocViewDocPermission
-                            </label>
-                            <label class="permission-item">
-                                <input type="checkbox" name="perm" value="16384">
-                                <span class="perm-value">16384</span> - DocPrintPermission
-                            </label>
-                            <label class="permission-item">
-                                <input type="checkbox" name="perm" value="32768">
-                                <span class="perm-value">32768</span> - DocExportSendPermission
-                            </label>
-                            <label class="permission-item">
-                                <input type="checkbox" name="perm" value="262144">
-                                <span class="perm-value">262144</span> - DocViewHistoryPermission
-                            </label>
-                            <label class="permission-item">
-                                <input type="checkbox" name="perm" value="524288">
-                                <span class="perm-value">524288</span> - DocAddAnnotationsPermission
-                            </label>
-                            <label class="permission-item">
-                                <input type="checkbox" name="perm" value="1048576">
-                                <span class="perm-value">1048576</span> - DocDeleteAnnotationsPermission
-                            </label>
-                            <label class="permission-item">
-                                <input type="checkbox" name="perm" value="2097152">
-                                <span class="perm-value">2097152</span> - DocEditPermission
-                            </label>
-                            <label class="permission-item">
-                                <input type="checkbox" name="perm" value="4194304">
-                                <span class="perm-value">4194304</span> - DocUpdateIndexDataPermission
-                            </label>
-                            <label class="permission-item">
-                                <input type="checkbox" name="perm" value="8388608">
-                                <span class="perm-value">8388608</span> - DocAddPagePermission
-                            </label>
-                            <label class="permission-item">
-                                <input type="checkbox" name="perm" value="16777216">
-                                <span class="perm-value">16777216</span> - DocDeletePagePermission
-                            </label>
-                            <label class="permission-item">
-                                <input type="checkbox" name="perm" value="33554432">
-                                <span class="perm-value">33554432</span> - DocDeleteDocPermission
-                            </label>
-                        </div>
-
-                        <h3>Workflow Permissions</h3>
-                        <div class="permission-checkboxes">
-                            <label class="permission-item">
-                                <input type="checkbox" name="perm" value="8589934592">
-                                <span class="perm-value">8589934592</span> - WfParticipatePermission
-                            </label>
-                            <label class="permission-item">
-                                <input type="checkbox" name="perm" value="17179869184">
-                                <span class="perm-value">17179869184</span> - WfAddDocPermission
-                            </label>
-                            <label class="permission-item">
-                                <input type="checkbox" name="perm" value="34359738368">
-                                <span class="perm-value">34359738368</span> - WfViewHistoryPermission
-                            </label>
-                            <label class="permission-item">
-                                <input type="checkbox" name="perm" value="68719476736">
-                                <span class="perm-value">68719476736</span> - WfDelegatePermission
-                            </label>
-                            <label class="permission-item">
-                                <input type="checkbox" name="perm" value="137438953472">
-                                <span class="perm-value">137438953472</span> - WfViewAllPermission
-                            </label>
-                            <label class="permission-item">
-                                <input type="checkbox" name="perm" value="274877906944">
-                                <span class="perm-value">274877906944</span> - WfDeletePermission
-                            </label>
-                        </div>
-
-                        <h3>Category Field Permissions</h3>
-                        <div class="permission-checkboxes">
-                            <label class="permission-item">
-                                <input type="checkbox" name="perm" value="4096">
-                                <span class="perm-value">4096</span> - CategoryFieldReadPermission
-                            </label>
-                            <label class="permission-item">
-                                <input type="checkbox" name="perm" value="64">
-                                <span class="perm-value">64</span> - CategoryFieldSetPermission
-                            </label>
-                            <label class="permission-item">
-                                <input type="checkbox" name="perm" value="4194304">
-                                <span class="perm-value">4194304</span> - CategoryFieldChangePermission
-                            </label>
-                        </div>
-
-                        <div class="permission-result">
-                            Calculated Permission Value: <strong id="calculated-permission">256</strong>
-                        </div>
-                    </div>
-                </section>
-
-                <!-- Object Permissions -->
-                <section class="form-section" id="object-permissions-section">
-                    <h2>Object Permissions</h2>
-                    <p class="section-desc">Configure permissions for specific Therefore objects. Leave ID empty to
-                        exclude from token.</p>
-
-                    <!-- Category -->
-                    <div class="object-permission">
-                        <h3>Category (the:ctgry)</h3>
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label for="category-id">Category ID</label>
-                                <input type="number" id="category-id" name="category-id" placeholder="305">
-                            </div>
-                            <div class="form-group">
-                                <label for="category-perm">Permission Value</label>
-                                <input type="text" id="category-perm" name="category-perm" placeholder="256">
-                            </div>
-                            <div class="form-group">
-                                <button type="button" class="btn-small btn-apply" data-target="category-perm">Apply
-                                    Calculated</button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Case Definition -->
-                    <div class="object-permission">
-                        <h3>Case Definition (the:casedef)</h3>
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label for="casedef-id">Case Definition ID</label>
-                                <input type="number" id="casedef-id" name="casedef-id" placeholder="9">
-                            </div>
-                            <div class="form-group">
-                                <label for="casedef-perm">Permission Value</label>
-                                <input type="text" id="casedef-perm" name="casedef-perm" placeholder="256">
-                            </div>
-                            <div class="form-group">
-                                <button type="button" class="btn-small btn-apply" data-target="casedef-perm">Apply
-                                    Calculated</button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Case -->
-                    <div class="object-permission">
-                        <h3>Case (the:case)</h3>
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label for="case-id">Case ID</label>
-                                <input type="number" id="case-id" name="case-id" placeholder="123">
-                            </div>
-                            <div class="form-group">
-                                <label for="case-perm">Permission Value</label>
-                                <input type="text" id="case-perm" name="case-perm" placeholder="256">
-                            </div>
-                            <div class="form-group">
-                                <button type="button" class="btn-small btn-apply" data-target="case-perm">Apply
-                                    Calculated</button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Document -->
-                    <div class="object-permission">
-                        <h3>Document (the:doc)</h3>
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label for="doc-id">Document ID</label>
-                                <input type="number" id="doc-id" name="doc-id" placeholder="456">
-                            </div>
-                            <div class="form-group">
-                                <label for="doc-perm">Permission Value</label>
-                                <input type="text" id="doc-perm" name="doc-perm" placeholder="8192">
-                            </div>
-                            <div class="form-group">
-                                <button type="button" class="btn-small btn-apply" data-target="doc-perm">Apply
-                                    Calculated</button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Workflow Instance -->
-                    <div class="object-permission">
-                        <h3>Workflow Instance (the:wfinst)</h3>
-                        <small class="object-note">Format: InstanceNo:TokenNo:Permission</small>
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label for="wfinst-id">Instance ID</label>
-                                <input type="number" id="wfinst-id" name="wfinst-id" placeholder="789">
-                            </div>
-                            <div class="form-group">
-                                <label for="wfinst-token">Token No</label>
-                                <input type="number" id="wfinst-token" name="wfinst-token" placeholder="1">
-                            </div>
-                            <div class="form-group">
-                                <label for="wfinst-perm">Permission Value</label>
-                                <input type="text" id="wfinst-perm" name="wfinst-perm" placeholder="8589934592">
-                            </div>
-                            <div class="form-group">
-                                <button type="button" class="btn-small btn-apply" data-target="wfinst-perm">Apply
-                                    Calculated</button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- eForm -->
-                    <div class="object-permission">
-                        <h3>eForm (the:eform)</h3>
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label for="eform-id">eForm ID</label>
-                                <input type="number" id="eform-id" name="eform-id" placeholder="101">
-                            </div>
-                            <div class="form-group">
-                                <label for="eform-perm">Permission Value</label>
-                                <input type="text" id="eform-perm" name="eform-perm" placeholder="256">
-                            </div>
-                            <div class="form-group">
-                                <button type="button" class="btn-small btn-apply" data-target="eform-perm">Apply
-                                    Calculated</button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Indexing Profile -->
-                    <div class="object-permission">
-                        <h3>Indexing Profile (the:ixprof)</h3>
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label for="ixprof-id">Indexing Profile ID</label>
-                                <input type="number" id="ixprof-id" name="ixprof-id" placeholder="55">
-                            </div>
-                            <div class="form-group">
-                                <label for="ixprof-perm">Permission Value</label>
-                                <input type="text" id="ixprof-perm" name="ixprof-perm" placeholder="256">
-                            </div>
-                            <div class="form-group">
-                                <button type="button" class="btn-small btn-apply" data-target="ixprof-perm">Apply
-                                    Calculated</button>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-                <!-- Generate Button -->
-                <div class="form-actions">
-                    <button type="submit" class="btn-primary" id="generate-btn">Generate JWT</button>
-                    <button type="reset" class="btn-secondary">Reset Form</button>
-                </div>
-            </form>
-
-            <!-- Output Section -->
-            <section class="output-section" id="output-section" style="display: none;">
-                <h2>Generated JWT</h2>
-
-                <div class="output-box">
-                    <label>JWT Token</label>
-                    <div class="token-container">
-                        <textarea id="jwt-output" readonly rows="4"></textarea>
-                        <button type="button" class="btn-copy" id="copy-jwt" title="Copy to clipboard">Copy</button>
-                    </div>
-                </div>
-
-                <div class="output-box">
-                    <label>Decoded Payload</label>
-                    <pre id="payload-preview"></pre>
-                </div>
-
-                <div class="output-box">
-                    <label>Authorization Header</label>
-                    <div class="token-container">
-                        <input type="text" id="auth-header" readonly>
-                        <button type="button" class="btn-copy" id="copy-header" title="Copy to clipboard">Copy</button>
-                    </div>
-                </div>
-            </section>
 
             </div>
 
             <!-- Decoder Tab -->
             <div id="decoder-tab" class="tab-content">
-            <section class="form-section">
-                <h2>JWT Decoder</h2>
-                <p class="section-desc">Paste an existing JWT to decode and inspect its contents.</p>
+                <section class="form-section">
+                    <h2>JWT Decoder</h2>
+                    <p class="section-desc">Paste an existing JWT to decode and inspect its contents.</p>
 
-                <div class="form-group">
-                    <label for="jwt-decode-input">JWT Token</label>
-                    <textarea id="jwt-decode-input" rows="3" placeholder="Paste JWT here (eyJhbGciOiJIUzI1NiIs...)"></textarea>
-                </div>
+                    <div class="form-group">
+                        <label for="jwt-decode-input">JWT Token</label>
+                        <textarea id="jwt-decode-input" rows="3"
+                            placeholder="Paste JWT here (eyJhbGciOiJIUzI1NiIs...)"></textarea>
+                    </div>
 
-                <div class="form-actions">
-                    <button type="button" class="btn-primary" id="decode-btn">Decode JWT</button>
-                    <button type="button" class="btn-secondary" id="clear-decode-btn">Clear</button>
-                </div>
+                    <div class="form-actions">
+                        <button type="button" class="btn-primary" id="decode-btn">Decode JWT</button>
+                        <button type="button" class="btn-secondary" id="clear-decode-btn">Clear</button>
+                    </div>
 
-                <div id="decode-output" style="display: none;">
-                    <div class="decode-result">
-                        <div class="decode-box">
-                            <label>Header</label>
-                            <pre id="decoded-header"></pre>
-                        </div>
+                    <div id="decode-output" style="display: none;">
+                        <div class="decode-result">
+                            <div class="decode-box">
+                                <label>Header</label>
+                                <pre id="decoded-header"></pre>
+                            </div>
 
-                        <div class="decode-box">
-                            <label>Payload</label>
-                            <pre id="decoded-payload"></pre>
-                        </div>
+                            <div class="decode-box">
+                                <label>Payload</label>
+                                <pre id="decoded-payload"></pre>
+                            </div>
 
-                        <div class="decode-box">
-                            <label>Token Status</label>
-                            <div id="token-status"></div>
+                            <div class="decode-box">
+                                <label>Token Status</label>
+                                <div id="token-status"></div>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <div id="decode-error" class="decode-error" style="display: none;"></div>
-            </section>
+                    <div id="decode-error" class="decode-error" style="display: none;"></div>
+                </section>
             </div>
         </main>
 
         <footer>
             <p>JWT generated client-side - your secret never leaves the browser</p>
+            <p><a href="https://canonau.service-now.com/kb_view.do?sysparm_article=KB0012049" target="_blank">Technical
+                    Services Custom JWT KB article</a></p>
             <p><a href="https://therefore.net/help/Online/en-us/sd_t_authmeth_admintasks_jwt.html"
                     target="_blank">Therefore JWT Documentation</a></p>
         </footer>
