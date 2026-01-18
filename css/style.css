@@ -424,12 +424,56 @@ header p {
     background: var(--surface);
     border-radius: var(--border-radius);
     text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
 }
 
 .permission-result strong {
     font-family: monospace;
     font-size: 1.25rem;
     color: var(--primary-color);
+}
+
+.btn-toggle-summary {
+    margin-left: 0.5rem;
+}
+
+.permission-summary {
+    margin-top: 1rem;
+    padding: 1rem;
+    background: var(--surface);
+    border-radius: var(--border-radius);
+    border: 1px solid var(--border-color);
+}
+
+.permission-summary ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.permission-summary li {
+    padding: 0.4rem 0;
+    border-bottom: 1px solid var(--border-color);
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+
+.permission-summary li:last-child {
+    border-bottom: none;
+}
+
+.permission-summary .perm-name {
+    color: var(--text-primary);
+    font-weight: 500;
+}
+
+.permission-summary .perm-desc {
+    color: var(--text-secondary);
+    font-size: 0.85rem;
 }
 
 /* Form Actions */

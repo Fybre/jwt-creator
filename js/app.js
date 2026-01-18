@@ -95,17 +95,54 @@ function setupDateListeners() {
 function setupPermissionCalculator() {
   const checkboxes = document.querySelectorAll('input[name="perm"]');
   const resultDisplay = document.getElementById("calculated-permission");
+  const toggleBtn = document.getElementById("toggle-perm-summary");
+  const summaryDiv = document.getElementById("permission-summary");
+  const summaryList = document.getElementById("permission-summary-list");
+
+  function updatePermissionTotal() {
+    let total = BigInt(0);
+    checkboxes.forEach((cb) => {
+      if (cb.checked) {
+        total += BigInt(cb.value);
+      }
+    });
+    resultDisplay.textContent = total.toString();
+    updatePermissionSummary();
+  }
+
+  function updatePermissionSummary() {
+    summaryList.innerHTML = "";
+    checkboxes.forEach((cb) => {
+      if (cb.checked) {
+        const label = cb.closest("label.permission-item");
+        if (label) {
+          const title = label.getAttribute("title") || "";
+          const permName = label.textContent.trim().replace(/^\d+\s*-\s*/, "");
+          const li = document.createElement("li");
+          li.innerHTML = `<span class="perm-name">${permName}</span> — <span class="perm-desc">${title}</span>`;
+          summaryList.appendChild(li);
+        }
+      }
+    });
+
+    if (summaryList.children.length === 0) {
+      const li = document.createElement("li");
+      li.textContent = "No permissions selected";
+      summaryList.appendChild(li);
+    }
+  }
+
+  toggleBtn.addEventListener("click", () => {
+    const isHidden = summaryDiv.style.display === "none";
+    summaryDiv.style.display = isHidden ? "block" : "none";
+    toggleBtn.textContent = isHidden ? "Hide Summary" : "Show Summary";
+    if (isHidden) {
+      updatePermissionSummary();
+    }
+  });
 
   checkboxes.forEach((checkbox) => {
-    checkbox.addEventListener("change", () => {
-      let total = BigInt(0);
-      checkboxes.forEach((cb) => {
-        if (cb.checked) {
-          total += BigInt(cb.value);
-        }
-      });
-      resultDisplay.textContent = total.toString();
-    });
+    checkbox.addEventListener("change", updatePermissionTotal);
   });
 }
 
