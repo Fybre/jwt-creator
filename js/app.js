@@ -465,6 +465,22 @@ async function generateJWT() {
     const ixprofId = document.getElementById("ixprof-id").value;
     const ixprofPerm = document.getElementById("ixprof-perm").value;
 
+    // Validate that at least one object permission is set when using therefore_specific scope
+    if (scope === "therefore_specific") {
+      const hasCategory = categoryId && categoryPerm;
+      const hasCaseDef = casedefId && casedefPerm;
+      const hasCase = caseId && casePerm;
+      const hasDoc = docId && docPerm;
+      const hasWfInst = wfinstId && wfinstPerm;
+      const hasEform = eformId && eformPerm;
+      const hasIxprof = ixprofId && ixprofPerm;
+
+      if (!hasCategory && !hasCaseDef && !hasCase && !hasDoc && !hasWfInst && !hasEform && !hasIxprof) {
+        alert("When using 'therefore_specific' scope, you must configure at least one object permission (Category, Case Definition, Case, Document, Workflow Instance, eForm, or Indexing Profile).");
+        return;
+      }
+    }
+
     // Add category if provided
     if (categoryId && categoryPerm) {
       payload["the:ctgry"] = `${categoryId}:${categoryPerm}`;
